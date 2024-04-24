@@ -3,8 +3,32 @@ const EMPTY_HEART = '♡'
 const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
+const errorModal = document.getElementById('modal')
+errorModal.classList.add("hidden");
 
+//invode mimicServerCall on heart click
+const liked = document.querySelectorAll(".like-glyph")
+console.log(liked)
+document.addEventListener('DOMContentLoaded', function() {
 
+liked.forEach(button => {
+button.addEventListener("click", function(){
+  mimicServerCall()
+  .then(() => {
+    // Handle successful response
+    button.textContent = FULL_HEART
+    button.classList.add('activated-heart')
+  })
+  .catch(() => {
+    // Handle error
+    setTimeout(() => {
+      errorModal.classList.add('hidden');
+    }, 3000);
+  });
+
+})
+});
+});
 
 
 //------------------------------------------------------------------------------
